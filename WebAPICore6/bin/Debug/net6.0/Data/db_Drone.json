@@ -1,0 +1,17 @@
+[
+  {
+    "id": 1,
+    "name": "SwissDrone",
+    "description": "This drone is the best SwissDrone's Drone."
+  },
+  {
+    "id": 2,
+    "name": "Anavia",
+    "description": "This drone is the best Anavia's Drone."
+  },
+  {
+    "id": 3,
+    "name": "DJI Mini",
+    "description": "This drone is the best DGI's Drone."
+  }
+]
