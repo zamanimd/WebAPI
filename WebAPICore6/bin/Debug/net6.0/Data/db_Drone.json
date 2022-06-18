@@ -2,16 +2,22 @@
   {
     "id": 1,
     "name": "SwissDrone",
-    "description": "This drone is the best SwissDrone's Drone."
+    "description": "This drone is the best SwissDrone's Drone.",
+    "createdate": "2022-01-01",
+    "isdeleted": 0
   },
   {
     "id": 2,
     "name": "Anavia",
-    "description": "This drone is the best Anavia's Drone."
+    "description": "This drone is the best Anavia's Drone.",
+    "createdate": "2022-01-02",
+    "isdeleted": 1
   },
   {
     "id": 3,
     "name": "DJI Mini",
-    "description": "This drone is the best DGI's Drone."
+    "description": "This drone is the best DGI's Drone.",
+    "createdate": "2022-01-03",
+    "isdeleted": 0
   }
 ]
