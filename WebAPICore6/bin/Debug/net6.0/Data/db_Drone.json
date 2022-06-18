@@ -1,23 +1,23 @@
 [
   {
-    "id": 1,
-    "name": "SwissDrone",
-    "description": "This drone is the best SwissDrone's Drone.",
-    "createdate": "2022-01-01",
-    "isdeleted": 0
+    "Id": 1,
+    "Name": "SwissDrone",
+    "Description": "This drone is the best SwissDrone's Drone.",
+    "CreateDate": "2022-01-01",
+    "IsDeleted": 0
   },
   {
-    "id": 2,
-    "name": "Anavia",
-    "description": "This drone is the best Anavia's Drone.",
-    "createdate": "2022-01-02",
-    "isdeleted": 1
+    "Id": 2,
+    "Name": "Anavia",
+    "Description": "This drone is the best Anavia's Drone.",
+    "CreateDate": "2022-01-02",
+    "IsDeleted": 0
   },
   {
-    "id": 3,
-    "name": "DJI Mini",
-    "description": "This drone is the best DGI's Drone.",
-    "createdate": "2022-01-03",
-    "isdeleted": 0
+    "Id": 3,
+    "Name": "DJI Mini 1",
+    "Description": "This is DGI mini 1 description.",
+    "CreateDate": "2022-01-03",
+    "IsDeleted": 0
   }
 ]

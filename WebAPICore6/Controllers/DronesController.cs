@@ -22,7 +22,7 @@ namespace WebAPICore6.Controllers
         #region Create
 
         //--- Create ---//
-        [HttpPost]
+        [HttpPost("Add{drone}")]
         public IActionResult AddDrone(Drone drone)
         {
             try
@@ -66,7 +66,7 @@ namespace WebAPICore6.Controllers
 
 
         //--- Read ---//
-        [HttpGet("all")]
+        [HttpGet("GetAll")]
         public IActionResult GetDrones()
         {
             try
@@ -75,7 +75,7 @@ namespace WebAPICore6.Controllers
                 var drones = dataManager.ReadAllData();
 
                 if (drones == null || drones.Count == 0)
-                    return BadRequest();
+                    return NotFound();
 
                 return Ok(drones);
             }
@@ -87,8 +87,8 @@ namespace WebAPICore6.Controllers
 
 
         //--- Read ---//
-        [HttpGet("{id}")]
-        public IActionResult GetDrone(int id)
+        [HttpGet("GetByID{id}")]
+        public IActionResult GetDroneByID(int id)
         {
             try
             {
@@ -99,7 +99,30 @@ namespace WebAPICore6.Controllers
                 var drone = dataManager.ReadData(id);
 
                 if (drone == null)
+                    return NotFound();
+
+                return Ok(drone);
+            }
+            catch
+            {
+                return BadRequest();
+            }
+        }
+
+        //--- Read ---//
+        [HttpGet("GetByName{name}")]
+        public IActionResult GetDroneByName(string name)
+        {
+            try
+            {
+                if (name == null || String.IsNullOrWhiteSpace(name))
                     return BadRequest();
+
+                DataManager dataManager = new DataManager();
+                var drone = dataManager.ReadData(name);
+
+                if (drone == null)
+                    return NotFound();
 
                 return Ok(drone);
             }
@@ -117,19 +140,16 @@ namespace WebAPICore6.Controllers
         #region Update
 
         //--- Update ---//
-        [HttpPut]
-        public IActionResult UpdateDrone(Drone drone)
+        [HttpPut("RecoverAll")]
+        public IActionResult RecoverDrones()
         {
             try
             {
-                if (drone == null)
-                    return BadRequest();
-
                 DataManager dataManager = new DataManager();
-                bool status = dataManager.AddData(drone);
+                bool status = dataManager.RecoverAllData();
 
                 if (!status)
-                    return BadRequest();
+                    return NotFound();
 
                 return Ok();
             }
@@ -140,8 +160,8 @@ namespace WebAPICore6.Controllers
         }
 
         //--- Update ---//
-        [HttpPut("recovery")]
-        public IActionResult RecoveryDrone(int id)
+        [HttpPut("RecoverByID{id}")]
+        public IActionResult RecoverDroneByID(int id)
         {
             try
             {
@@ -152,7 +172,7 @@ namespace WebAPICore6.Controllers
                 bool status = dataManager.RecoverData(id);
 
                 if (!status)
-                    return BadRequest();
+                    return NotFound();
 
                 return Ok();
             }
@@ -161,6 +181,29 @@ namespace WebAPICore6.Controllers
                 return BadRequest();
             }
         }
+
+        //--- Update ---//
+        [HttpPut("UpdateByDrone")]
+        public IActionResult UpdateDrone(Drone drone)
+        {
+            try
+            {
+                if (drone == null)
+                    return BadRequest();
+
+                DataManager dataManager = new DataManager();
+                bool status = dataManager.UpdateData(drone);
+
+                if (!status)
+                    return NotFound();
+
+                return Ok();
+            }
+            catch
+            {
+                return BadRequest();
+            }
+        }  
 
         #endregion
 
@@ -170,7 +213,7 @@ namespace WebAPICore6.Controllers
         #region Delete
 
         //--- Delete ---//
-        [HttpDelete]
+        [HttpDelete("DeleteAll")]
         public IActionResult DeleteDrones()
         {
             try
@@ -179,7 +222,7 @@ namespace WebAPICore6.Controllers
                 bool status = dataManager.RemoveAllData();
 
                 if (!status)
-                    return BadRequest();
+                    return NotFound();
 
                 return Ok();
             }
@@ -191,8 +234,8 @@ namespace WebAPICore6.Controllers
 
 
         //--- Delete ---//
-        [HttpDelete("{id}")]
-        public IActionResult DeleteDroneBy(int id)
+        [HttpDelete("DeleteByID{id}")]
+        public IActionResult DeleteDroneByID(int id)
         {
             try
             {
@@ -203,7 +246,30 @@ namespace WebAPICore6.Controllers
                 bool status = dataManager.RemoveData(id);
 
                 if (!status)
+                    return NotFound();
+
+                return Ok();
+            }
+            catch
+            {
+                return BadRequest();
+            }
+        }
+
+        //--- Delete ---//
+        [HttpDelete("DeleteByName{name}")]
+        public IActionResult DeleteDroneByName(string name)
+        {
+            try
+            {
+                if (name == null || string.IsNullOrWhiteSpace(name))
                     return BadRequest();
+
+                DataManager dataManager = new DataManager();
+                bool status = dataManager.RemoveData(name);
+
+                if (!status)
+                    return NotFound();
 
                 return Ok();
             }

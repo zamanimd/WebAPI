@@ -5,6 +5,13 @@ namespace WebAPICore6.Data
 {
     public class DataManager
     {
+        public enum SelectData
+        {
+            All,
+            Deleted,
+            NotDeleted
+        }
+
         static string dbDirectory = Path.Combine(Directory.GetCurrentDirectory(), $"Data\\{"db_Drone.json"}");
 
         string ReadFile()
@@ -18,36 +25,7 @@ namespace WebAPICore6.Data
             File.WriteAllText(dbDirectory, content);
         }
 
-
-        #region Create
-        //--- Creat ---//
-        public bool AddData(Drone drone)
-        {
-            try
-            {
-                bool result = false;
-                var list = ReadAllData();
-
-                list.Add(new Drone(drone.Id, drone.Name, drone.Description, drone.CreateDate, 0));
-
-                var convertedJson = JsonConvert.SerializeObject(list, Formatting.Indented);
-                WriteFile(convertedJson);
-
-                return result;
-            }
-            catch
-            {
-                return false;
-            }
-        }
-
-        #endregion
-
-
-
-        #region Read
-        //--- Read ---//
-        public List<Drone> ReadAllData()
+        public List<Drone> GetAllData()
         {
             try
             {
@@ -62,29 +40,83 @@ namespace WebAPICore6.Data
             catch
             {
                 return null;
-            }        
+            }
         }
 
+
+
+        #region Create
+        //--- Creat ---//
+        public bool AddData(Drone drone)
+        {
+            try
+            {
+                bool result = false;
+                var lst_Drones = GetAllData();
+
+                lst_Drones.Add(new Drone(drone.Id, drone.Name, drone.Description, drone.CreateDate, drone.IsDeleted));
+
+                var convertedJson = JsonConvert.SerializeObject(lst_Drones, Formatting.Indented);
+                WriteFile(convertedJson);
+
+                result = true;
+                return result;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        #endregion
+
+
+
+        #region Read
+        //--- Read ---//
         public Drone ReadData(int id)
         {
             try
             {
-                string jsonData = ReadFile();
-                var drones = new List<Drone>();
-                var _drone = new Drone();
+                var lst_Drones = GetAllData();
+                if (lst_Drones == null)
+                    return null;
 
-                if (jsonData != null)
-                {
-                    drones = JsonConvert.DeserializeObject<List<Drone>>(jsonData);
-                    if (drones != null)
-                    {
-                        _drone = drones
-                            .Where(x => x.IsDeleted == 0)
-                            .FirstOrDefault(x => x.Id == id);
-                    }
-                }
+                return lst_Drones.FirstOrDefault(x => x.Id == id && x.IsDeleted == 0);
+            }
+            catch
+            {
+                return null;
+            }
+        }
 
-                return _drone;
+        public Drone ReadData(string name)
+        {
+            try
+            {
+                var lst_Drones = GetAllData();
+                if (lst_Drones == null)
+                    return null;
+
+                return lst_Drones.FirstOrDefault(x => x.Name == name && x.IsDeleted == 0);
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        //--- Read ---//
+        public List<Drone> ReadAllData()
+        {
+            try
+            {
+                var lst_Drones = GetAllData();
+                if (lst_Drones == null)
+                    return null;
+                lst_Drones = lst_Drones.Where(x => x.IsDeleted == 0).ToList();
+
+                return lst_Drones;
             }
             catch
             {
@@ -103,17 +135,23 @@ namespace WebAPICore6.Data
             try
             {
                 bool result = false;
+                var lst_Drones = GetAllData();
 
-                //foreach (Drone item in lst_drones)
-                //{
-                //    if (drone.Id == item.Id)
-                //    {
-                //        item.Name = drone.Name;
-                //        item.Description = drone.Description;
-                //        return Ok();
-                //    }
-                //}
+                foreach (Drone item in lst_Drones)
+                {
+                    if (item.Id == drone.Id && item.IsDeleted == 0)
+                    {
+                        item.Name = drone.Name;
+                        item.Description = drone.Description;
+                        item.CreateDate = drone.CreateDate;
+                        item.IsDeleted = drone.IsDeleted;
+                        break;
+                    }
+                }
+                var convertedJson = JsonConvert.SerializeObject(lst_Drones, Formatting.Indented);
+                WriteFile(convertedJson);
 
+                result = true;
                 return result;
             }
             catch
@@ -122,29 +160,27 @@ namespace WebAPICore6.Data
             }
         }
 
-
-        public bool RecoverAllData(int id)
+        public bool RecoverAllData()
         {
             try
             {
                 bool result = false;
+                var lst_Drones = GetAllData();
 
-                //foreach (Drone item in lst_drones)
-                //{
-                //    if (drone.Id == item.Id)
-                //    {
-                //        item.Name = drone.Name;
-                //        item.Description = drone.Description;
-                //        return Ok();
-                //    }
-                //}
+                foreach (Drone item in lst_Drones)
+                {
+                    item.IsDeleted = 0;
+                }
+                var convertedJson = JsonConvert.SerializeObject(lst_Drones, Formatting.Indented);
+                WriteFile(convertedJson);
 
+                result = true;
                 return result;
             }
             catch
             {
                 return false;
-            }      
+            }
         }
 
         public bool RecoverData(int id)
@@ -152,17 +188,20 @@ namespace WebAPICore6.Data
             try
             {
                 bool result = false;
+                var lst_Drones = GetAllData();
 
-                //foreach (Drone item in lst_drones)
-                //{
-                //    if (drone.Id == item.Id)
-                //    {
-                //        item.Name = drone.Name;
-                //        item.Description = drone.Description;
-                //        return Ok();
-                //    }
-                //}
+                foreach (Drone item in lst_Drones)
+                {
+                    if (item.Id == id)
+                    {
+                        item.IsDeleted = 0;
+                        break;
+                    }
+                }
+                var convertedJson = JsonConvert.SerializeObject(lst_Drones, Formatting.Indented);
+                WriteFile(convertedJson);
 
+                result = true;
                 return result;
             }
             catch
@@ -182,7 +221,16 @@ namespace WebAPICore6.Data
             try
             {
                 bool result = false;
+                var lst_Drones = GetAllData();
 
+                foreach (Drone item in lst_Drones)
+                {
+                    item.IsDeleted = 1;
+                }
+                var convertedJson = JsonConvert.SerializeObject(lst_Drones, Formatting.Indented);
+                WriteFile(convertedJson);
+
+                result = true;
                 return result;
             }
             catch
@@ -196,6 +244,46 @@ namespace WebAPICore6.Data
             try
             {
                 bool result = false;
+                var lst_Drones = GetAllData();
+
+                foreach (Drone item in lst_Drones)
+                {
+                    if (item.Id == id && item.IsDeleted == 0)
+                    {
+                        item.IsDeleted = 1;
+                        break;
+                    }
+                }
+                var convertedJson = JsonConvert.SerializeObject(lst_Drones, Formatting.Indented);
+                WriteFile(convertedJson);
+
+                result = true;
+                return result;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public bool RemoveData(string name)
+        {
+            try
+            {
+                bool result = false;
+                var lst_Drones = GetAllData();
+
+                foreach (Drone item in lst_Drones)
+                {
+                    if (item.Name == name && item.IsDeleted == 0)
+                    {
+                        item.IsDeleted = 1;
+                        result = true;
+                        break;
+                    }
+                }
+                var convertedJson = JsonConvert.SerializeObject(lst_Drones, Formatting.Indented);
+                WriteFile(convertedJson);
 
                 return result;
             }
@@ -206,8 +294,5 @@ namespace WebAPICore6.Data
         }
 
         #endregion
-
-
-
     }
 }

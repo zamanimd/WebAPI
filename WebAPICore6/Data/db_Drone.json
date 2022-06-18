@@ -11,20 +11,13 @@
     "Name": "Anavia",
     "Description": "This drone is the best Anavia's Drone.",
     "CreateDate": "2022-01-02",
-    "IsDeleted": 1
-  },
-  {
-    "Id": 3,
-    "Name": "DJI Mini",
-    "Description": "This drone is the best DGI's Drone.",
-    "CreateDate": "2022-01-03",
     "IsDeleted": 0
   },
   {
-    "Id": 4,
-    "Name": "Sample Drone",
-    "Description": "This is a sample drone description.",
-    "CreateDate": "2022-06-17",
+    "Id": 3,
+    "Name": "DJI Mini 1",
+    "Description": "This is DGI mini 1 description.",
+    "CreateDate": "2022-01-03",
     "IsDeleted": 0
   }
 ]
