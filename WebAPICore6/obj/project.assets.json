@@ -452,7 +452,7 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\CIRUS\\.nuget\\packages\\": {},
+    "C:\\Users\\Mohammad\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
@@ -461,14 +461,14 @@
       "projectUniqueName": "D:\\Github\\WebAPI\\WebAPICore6\\WebAPICore6.csproj",
       "projectName": "WebAPICore6",
       "projectPath": "D:\\Github\\WebAPI\\WebAPICore6\\WebAPICore6.csproj",
-      "packagesPath": "C:\\Users\\CIRUS\\.nuget\\packages\\",
+      "packagesPath": "C:\\Users\\Mohammad\\.nuget\\packages\\",
       "outputPath": "D:\\Github\\WebAPI\\WebAPICore6\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\CIRUS\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Mohammad\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
