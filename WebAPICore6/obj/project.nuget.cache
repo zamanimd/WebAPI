@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "dhiHJ/YNh7BRP4cm27TUiPJsBwwHkPjgsmGngtKPMoObfaLaPLnaKrtcbjwyJqPCVpH5O6d+konV4RBoO9yK7w==",
+  "dgSpecHash": "Dz15LwXPP4OdlfbOGrXYrsJHeU3u6Al6h2aKOf+6b4icY78VrvoSONcMrHWwfzkFivyyixZeVGVfnW+ci9JaIQ==",
   "success": true,
-  "projectFilePath": "D:\\GitHub\\WebAPI\\WebAPICore6\\WebAPICore6.csproj",
+  "projectFilePath": "D:\\Github-Aryana\\WebAPI\\WebAPICore6\\WebAPICore6.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Mohammad\\.nuget\\packages\\microsoft.aspnetcore.jsonpatch\\6.0.5\\microsoft.aspnetcore.jsonpatch.6.0.5.nupkg.sha512",
     "C:\\Users\\Mohammad\\.nuget\\packages\\microsoft.aspnetcore.mvc.newtonsoftjson\\6.0.5\\microsoft.aspnetcore.mvc.newtonsoftjson.6.0.5.nupkg.sha512",
@@ -16,12 +16,5 @@
     "C:\\Users\\Mohammad\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\6.2.3\\swashbuckle.aspnetcore.swaggergen.6.2.3.nupkg.sha512",
     "C:\\Users\\Mohammad\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\6.2.3\\swashbuckle.aspnetcore.swaggerui.6.2.3.nupkg.sha512"
   ],
-  "logs": [
-    {
-      "code": "Undefined",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Problem reading the cache file D:\\GitHub\\WebAPI\\WebAPICore6\\obj\\project.nuget.cache : Invalid property identifier character: <. Path 'version', line 3, position 0."
-    }
-  ]
+  "logs": []
 }
